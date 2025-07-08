@@ -63,18 +63,18 @@ export const createEvent = async (req, res) => {
     const convenor = await Admin.findOne({ committeeId }).select("email");
     const admin = await Admin.findOne({ role: "admin" }).select("email");
     const convenorMailOptions = {
-      from: "planZ <planZsp@gmail.com>",
+      from: "Handlebit <Handlebitsp@gmail.com>",
       to: convenor.email,
       subject: `New Event Created - ${name}`,
-      text: `Hi,\n\nA new event has been created.\n\nEvent Name: ${name}.\nCreated By: ${parsedCreator.name}.\n\nPlease Login to review the event under Unapproved Events Section.\nRegards Team planZ.`,
+      text: `Hi,\n\nA new event has been created.\n\nEvent Name: ${name}.\nCreated By: ${parsedCreator.name}.\n\nPlease Login to review the event under Unapproved Events Section.\nRegards Team Handlebit.`,
     };
     sendEmail(convenorMailOptions);
 
     const adminMailOptions = {
-      from: "planZ <planZsp@gmail.com>",
+      from: "Handlebit <Handlebitsp@gmail.com>",
       to: admin.email,
       subject: `New Event Created - ${name}`,
-      text: `Hi,\n\nA new event has been created.\n\nEvent Name: ${name}.\nCreated By: ${parsedCreator.name}.\n\nPlease Login to review or Approve the event under Approve Events Section.\nRegards Team planZ.`,
+      text: `Hi,\n\nA new event has been created.\n\nEvent Name: ${name}.\nCreated By: ${parsedCreator.name}.\n\nPlease Login to review or Approve the event under Approve Events Section.\nRegards Team Handlebit.`,
     };
     sendEmail(adminMailOptions);
     return res.status(201).json(savedEvent);
@@ -309,10 +309,10 @@ export const sendCertificate = async (req, res) => {
 
         if (user.email) {
           const mailOptions = {
-            from: "planZ <planZsp@gmail.com>",
+            from: "Handlebit <Handlebitsp@gmail.com>",
             to: user.email,
             subject: `Event Certificate - ${user.event[0].name}`,
-            text: `Dear ${user.name},\n\nThank You!\nFor attending the event "${user.event[0].name}". Attached to this email is your certificate.\n\nBest regards,\nTeam planZ .`,
+            text: `Dear ${user.name},\n\nThank You!\nFor attending the event "${user.event[0].name}". Attached to this email is your certificate.\n\nBest regards,\nTeam Handlebit .`,
             attachments: [
               {
                 filename: `${user.name.split(" ")[0]}_certificate.pdf`,

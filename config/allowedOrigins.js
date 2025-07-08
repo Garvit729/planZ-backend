@@ -1,5 +1,5 @@
 const allowedOrigins = [
-  "https://planz-three.vercel.app/",
+  "https://p-lan-z.vercel.app/",
   "http://localhost:8080/"
 ];
 export default allowedOrigins;
