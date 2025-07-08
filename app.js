@@ -139,6 +139,8 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("database connected successfully");
-    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
   })
   .catch((error) => console.log(`${error} did not connect`));
+
+export default app;
+
