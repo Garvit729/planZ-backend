@@ -1,14 +1,18 @@
-// api/index.js
+import app from "../app.js";
+import serverless from "serverless-http";
+import mongoose from "mongoose";
 
-import app from '../app.js'; // your Express app
-import serverless from 'serverless-http'; // required to wrap Express
-import mongoose from 'mongoose'; // only needed for connecting to MongoDB
+// ✅ Allow background tasks to run without blocking Vercel shutdown
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
 
 let isConnected = false;
 
 const handler = async (req, res) => {
   if (!isConnected) {
-    console.log("🔌 Connecting to MongoDB...");
     try {
       await mongoose.connect(process.env.MONGO_URL);
       isConnected = true;
@@ -20,7 +24,7 @@ const handler = async (req, res) => {
   }
 
   const expressHandler = serverless(app);
-  return expressHandler(req, res);
+  return await expressHandler(req, res); // ✅ await ensures clean exit
 };
 
 export default handler;
