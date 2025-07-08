@@ -43,15 +43,6 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Backend is running 🚀",
-  });
-});
-
-app.get("/favicon.ico", (req, res) => res.status(204).end());
-
 
 // cloudinary config
 cloudinary.config({
@@ -142,9 +133,12 @@ app.use("*", (req, res) => {
 });
 // MONGOOSE Setup
 
-// const PORT = process.env.PORT ;
+const PORT = process.env.PORT ;
 
-
-
-export default app;
-
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("database connected successfully");
+    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+  })
+  .catch((error) => console.log(`${error} did not connect`));
