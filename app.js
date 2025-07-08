@@ -42,6 +42,7 @@ app.use(express.json());
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 
 
 // cloudinary config
@@ -135,12 +136,7 @@ app.use("*", (req, res) => {
 
 const PORT = process.env.PORT ;
 
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    console.log("database connected successfully");
-  })
-  .catch((error) => console.log(`${error} did not connect`));
+
 
 export default app;
 
