@@ -10,10 +10,7 @@ const handler = async (req, res) => {
   if (!isConnected) {
     console.log("🔌 Connecting to MongoDB...");
     try {
-      await mongoose.connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      await mongoose.connect(process.env.MONGO_URL);
       isConnected = true;
       console.log("✅ MongoDB connected");
     } catch (err) {
